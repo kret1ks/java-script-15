@@ -190,3 +190,41 @@ const getUsersWithFriend = (users, friendName) => {
 
 console.log(getUsersWithFriend(users, 'Briana Decker')); // [ 'Sharlene Bush', 'Sheree Anthony' ]
 console.log(getUsersWithFriend(users, 'Goldie Gentry')); // [ 'Elma Head', 'Sheree Anthony' ]
+
+
+
+
+
+
+
+// Масив імен (поле name) людей, відсортованих в залежності від кількості їх друзів (поле friends)
+
+const getNamesSortedByFriendsCount = users => {
+   return users
+   .map(user => ({name: user.name, friendsCount: user.friends.length}))
+   .sort((a, b) => a.friendsCount - b.friendsCount)
+   .map(user => user.name)
+};
+
+console.log(getNamesSortedByFriendsCount(users));
+// [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
+
+
+
+
+
+
+
+
+// Отримати масив всіх умінь всіх користувачів (поле skills), при цьому не має бути повторюваних умінь і вони повинні бути відсортовані в алфавітному порядку.
+
+const getSortedUniqueSkills = users => {
+  return users 
+  .flatMap(user => user.skills)
+  .filter((skill, index, array) => array.indexOf(skill) === index)
+  sort()
+};
+
+console.log(getSortedUniqueSkills(users));
+// [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
+
