@@ -173,20 +173,20 @@ const users = [
 // Отримати загальну суму балансу (поле balance) всіх користувачів.
 
 const calculateTotalBalance = users => users.reduce((acc, {balance}) => acc + balance,0)
-console.log(calculateTotalBalance(users)); // 20916
-
+console.log(calculateTotalBalance(users));// 20916
 
 
 
 // Масив імен всіх користувачів у яких є друг із зазначеним ім'ям.
 const getUsersWithFriend = (users, friendName) => {
-    return users.reduce((acc, {name, friends}) => {
-        if(friends.includes(friendName)){
-            acc.push(name)
-        }
-        return acc
-    }, [])
-};
+  return users.reduce((acc, {name, friends}) => {
+    if(friends.includes(friendName)){
+      acc.push(name)
+    }
+    return acc;
+  }, [])
+}
+
 
 console.log(getUsersWithFriend(users, 'Briana Decker')); // [ 'Sharlene Bush', 'Sheree Anthony' ]
 console.log(getUsersWithFriend(users, 'Goldie Gentry')); // [ 'Elma Head', 'Sheree Anthony' ]
@@ -222,7 +222,7 @@ const getSortedUniqueSkills = users => {
   return users 
   .flatMap(user => user.skills)
   .filter((skill, index, array) => array.indexOf(skill) === index)
-  sort()
+  .sort()
 };
 
 console.log(getSortedUniqueSkills(users));
