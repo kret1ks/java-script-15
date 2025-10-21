@@ -173,19 +173,16 @@ const users = [
 // Отримати загальну суму балансу (поле balance) всіх користувачів.
 
 const calculateTotalBalance = users => users.reduce((acc, {balance}) => acc + balance,0)
-console.log(calculateTotalBalance(users));// 20916
+console.log(calculateTotalBalance(users)); // 20916
+
+
+
 
 
 
 // Масив імен всіх користувачів у яких є друг із зазначеним ім'ям.
-const getUsersWithFriend = (users, friendName) => {
-  return users.reduce((acc, {name, friends}) => {
-    if(friends.includes(friendName)){
-      acc.push(name)
-    }
-    return acc;
-  }, [])
-}
+
+const getUsersWithFriend = (users, friendName) => users.filter(({friends}) => friends.includes(friendName)).map(({name}) => name);
 
 
 console.log(getUsersWithFriend(users, 'Briana Decker')); // [ 'Sharlene Bush', 'Sheree Anthony' ]
@@ -197,15 +194,10 @@ console.log(getUsersWithFriend(users, 'Goldie Gentry')); // [ 'Elma Head', 'Sher
 
 
 
+
 // Масив імен (поле name) людей, відсортованих в залежності від кількості їх друзів (поле friends)
 
-const getNamesSortedByFriendsCount = users => {
-   return users
-   .map(user => ({name: user.name, friendsCount: user.friends.length}))
-   .sort((a, b) => a.friendsCount - b.friendsCount)
-   .map(user => user.name)
-};
-
+const getNamesSortedByFriendsCount = users => [...users].sort((a, b) => a.friends.length - b.friends.length).map(({name}) => name)
 console.log(getNamesSortedByFriendsCount(users));
 // [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
 
@@ -216,15 +208,11 @@ console.log(getNamesSortedByFriendsCount(users));
 
 
 
+
+
 // Отримати масив всіх умінь всіх користувачів (поле skills), при цьому не має бути повторюваних умінь і вони повинні бути відсортовані в алфавітному порядку.
 
-const getSortedUniqueSkills = users => {
-  return users 
-  .flatMap(user => user.skills)
-  .filter((skill, index, array) => array.indexOf(skill) === index)
-  .sort()
-};
+const getSortedUniqueSkills = users => users.flatMap(({skills}) => skills).filter((item, idx, arr) => arr.indexOf(item) === idx).sort((a, b) => a.localeCompare(b))
 
 console.log(getSortedUniqueSkills(users));
 // [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
-
